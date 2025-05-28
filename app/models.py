@@ -40,4 +40,4 @@ class Feedback(Base):
     company = relationship("Company", back_populates="feedbacks")
 
     def __repr__(self):
-        return f"<Feedback(id={self.id}, rating = {self.rating})>"
+        return f"<Feedback(id={self.id}, customer = {self.customer},  rating = {self.rating}, content = {self.content})>"

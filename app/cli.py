@@ -13,7 +13,10 @@ def menu():
     print("4. List Customers")
     print("5. List Companies")
     print("6. List Feedbacks")
-    print("7. Exit")
+    print("7. Delete Customer")
+    print("8. Delete Company")
+    print("9. Delete Feedback")
+    print("10. Exit")
 
 def create_customer(session):
     name = input("Enter customer name: ").strip()
@@ -79,6 +82,40 @@ def list_feedbacks(session):
     for f in feedbacks:
         print(f)
 
+
+def delete_customer(session):
+    id = input("Enter Customer ID to delete: ").strip()
+    customer = session.get(Customer, id)
+    if customer:
+        session.delete(customer)
+        session.commit()
+        print("Customer deleted.")
+    else:
+        print("Customer not found")
+
+def delete_company(session):
+    id = input("Enter Company ID to delete: ").strip()
+    company = session.get(Company, id)
+    if company:
+        session.delete(company)
+        session.commit()
+        print("Company deleted.")
+    else:
+        print("Company not found.")
+
+def delete_feedback(session):
+    id = input("Enter Feedback ID to delete: ").strip()
+    feedback = session.get(Feedback, id)
+    if feedback:
+        session.delete(feedback)
+        session.commit()
+        print("Feedback deleted.")
+    else:
+        print("Feedback not found.")
+
+
+
+
 def main():
     create_tables()
     session = SessionLocal()
@@ -98,6 +135,12 @@ def main():
         elif choice == "6":
             list_feedbacks(session)
         elif choice == "7":
+            delete_customer(session)
+        elif choice == "8":
+            delete_company(session)
+        elif choice == "9":
+            delete_feedback(session)
+        elif choice ==  "10":
             print("Goodbye!")
             break
         else:
