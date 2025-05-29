@@ -13,10 +13,11 @@ def menu():
     print("4. List Customers")
     print("5. List Companies")
     print("6. List Feedbacks")
-    print("7. Delete Customer")
-    print("8. Delete Company")
-    print("9. Delete Feedback")
-    print("10. Exit")
+    print("7. View Feedbacks by Customer")
+    print("8. Delete Customer")
+    print("9. Delete Company")
+    print("10. Delete Feedback")
+    print("11. Exit")
 
 def create_customer(session):
     name = input("Enter customer name: ").strip()
@@ -66,6 +67,15 @@ def create_feedback(session):
     except IntegrityError:
         session.rollback()
         print("Error: Invalid customer or company ID.")
+
+def view_feedbacks_by_customer(session):
+    customer_id = input("Enter Customer ID: ").strip()
+    customer = session.get(Customer, customer_id)
+    if customer:
+        for feedback in customer.feedbacks:
+            print(feedback)
+    else:
+        print("Customer not found.")
 
 def list_customers(session):
     customers = session.query(Customer).all()
@@ -135,12 +145,14 @@ def main():
         elif choice == "6":
             list_feedbacks(session)
         elif choice == "7":
-            delete_customer(session)
+            view_feedbacks_by_customer(session)    
         elif choice == "8":
-            delete_company(session)
+            delete_customer(session)
         elif choice == "9":
+            delete_company(session)
+        elif choice == "10":
             delete_feedback(session)
-        elif choice ==  "10":
+        elif choice ==  "11":
             print("Goodbye!")
             break
         else:
