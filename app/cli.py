@@ -6,7 +6,7 @@ def create_tables():
     Base.metadata.create_all(bind=engine)
 
 def menu():
-    print("\n--- Customer Feedback System ---")
+    print("\n----- Customer Feedback System -----")
     print("1. Create Customer")
     print("2. Create Company")
     print("3. Create Feedback")
@@ -153,7 +153,7 @@ def main():
         elif choice == "10":
             delete_feedback(session)
         elif choice ==  "11":
-            print("Goodbye!")
+            print("see you soon!")
             break
         else:
             print("Invalid choice, try again.")
